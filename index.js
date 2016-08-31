@@ -30,6 +30,12 @@ var DEFAULT_OPTIONS = {
 
     // path
     ironIconsetSvgPath: '../iron-iconset-svg/iron-iconset-svg.html',
+
+    /**
+     * Iconset file name
+     * @type {String}
+     */
+    fileName: null
 };
 
 function polymerIconset(options) {
@@ -44,6 +50,11 @@ function polymerIconset(options) {
             'gulp-polymer-iconset',
             'iconsetName option is required'
         );
+    }
+
+    // default filename if is not set
+    if (!options.fileName) {
+      options.fileName = options.iconsetName + '.html';
     }
 
     // start an empty icons string
@@ -113,7 +124,7 @@ function polymerIconset(options) {
 
         // create the file object
         var file = new gulpUtil.File({
-            path: options.iconsetName + '.html',
+            path: options.fileName,
             contents: new Buffer(iconSetHtml),
         });
 
