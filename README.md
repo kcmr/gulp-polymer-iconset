@@ -16,7 +16,7 @@ var polymerIconset = require('gulp-polymer-iconset'),
 gulp.task('styles', function(){
   return gulp.src('app/icons/**/*')
     .pipe(polymerIconset({
-        iconSetName: 'my-icons',
+        iconsetName: 'my-namespace',
         iconSize: 18,
         iconId: function (file) {
             return 'my-icons' + ':' + path.basename(file.path, '.svg');
@@ -53,6 +53,6 @@ It results in:
 ```
 
 ## Options
-* _iconSetName_ (String)
+* _iconsetName_ (String)
 * _iconSize_ (String)
 * _iconId_ (String|Function): if function, takes the file corresponding to the icon, and should return a String
