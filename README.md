@@ -1,26 +1,23 @@
-# Gulp polimerize css
+# gulp-polymer-iconset
 Gulp plugin that generates an `<iron-iconset-svg>` given a group of .svg icon files.
 
 ## Usage
 
 Install it with npm
-    
+
     npm install gulp-polymer-iconset
 
 In your <code>gulpfile.js</code>:
 
 ```javascript
-var polymerIconset = require('gulp-polymer-iconset'),
-    rename = require('gulp-rename');
+var polymerIconset = require('gulp-polymer-iconset');
 
-gulp.task('styles', function(){
+gulp.task('styles', function() {
   return gulp.src('app/icons/**/*')
     .pipe(polymerIconset({
         iconsetName: 'my-namespace',
         iconSize: 18,
-        iconId: function (file) {
-            return 'my-icons' + ':' + path.basename(file.path, '.svg');
-        },
+        fileName: 'my-namespace-icons.html'
     }))
     .pipe(gulp.dest('app/iconsets'));
 });
@@ -28,22 +25,18 @@ gulp.task('styles', function(){
 
 It results in:
 ```html
-<link rel="import" href="../iron-icon/iron-icon.html">
 <link rel="import" href="../iron-iconset-svg/iron-iconset-svg.html">
 
-<iron-iconset-svg name="my-icons" size="18">
+<iron-iconset-svg name="my-namespace" size="18">
   <svg>
     <defs>
-        
-<!-- my-icons:icon-01 -->
-<g id="my-icons:icon-01">
+
+<g id="icon-01">
   <polygon points="..."/>
   <path d="..."/>
 </g>
-<!-- my-icons:icon-01 -->
 
-<!-- my-icons:icon-02 -->
-<g id="my-icons:icon-02">
+<g id="icon-02">
   <path d="..."/>
 </g>
 
@@ -56,3 +49,4 @@ It results in:
 * _iconsetName_ (String)
 * _iconSize_ (String)
 * _iconId_ (String|Function): if function, takes the file corresponding to the icon, and should return a String
+* _fileName_ (String) File name of the iconset. If not specified it will be the same as _iconsetName_.
