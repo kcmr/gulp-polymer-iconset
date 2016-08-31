@@ -52,9 +52,9 @@ function polymerIconset(options) {
     function bufferContents(file, encoding, cb) {
 
         // evaluate options according to file
-        var iconId = (typeof options.iconId === 'function') ? 
+        var iconId = (typeof options.iconId === 'function') ?
             options.iconId(file) : options.iconId;
-        var iconSelector = (typeof options.iconSelector === 'function') ? 
+        var iconSelector = (typeof options.iconSelector === 'function') ?
             options.iconSelector(file) : options.iconSelector;
 
         if (file.isNull()) {
@@ -63,9 +63,6 @@ function polymerIconset(options) {
         }
 
         if (file.isBuffer()) {
-            // var to hold the icon svg string
-            var svgStr = '\n<!-- ' + iconId + ' -->\n';
-
             // build a cheerio dom
             var $ = cheerio.load(file.contents.toString(encoding), {
                 xmlMode: true
@@ -83,20 +80,14 @@ function polymerIconset(options) {
                 // give id to the iconNode
                 $(svgNodeContents[0]).attr('id', iconId);
 
-                svgStr += $.xml(svgNodeContents[0]);
+                iconsSvgString += $.xml(svgNodeContents[0]);
             } else {
                 // the icon is not ready to be added,
                 // we must wrap it with an 'g' (group) tag
                 // before adding
 
-                svgStr += '<g id="' + iconId + '">\n' + $.xml(svgNodeContents) + '\n</g>';
+                iconsSvgString += '<g id="' + iconId + '">\n' + $.xml(svgNodeContents) + '\n</g>';
             }
-
-            // add finishing comment
-            svgStr += '\n<!-- ' + iconId + ' -->\n'
-
-            // add it to the full iconset icons string
-            iconsSvgString += svgStr;
         }
 
         if (file.isStream()) {
