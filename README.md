@@ -46,7 +46,7 @@ It results in:
 ```
 
 ## Options
-* _iconsetName_ (String)
-* _iconSize_ (String)
-* _iconId_ (String|Function): if function, takes the file corresponding to the icon, and should return a String
-* _fileName_ (String) File name of the iconset. If not specified it will be the same as _iconsetName_.
+* `iconsetName` (String)
+* `iconSize` (String)
+* `iconId` (String|Function): if function, takes the file corresponding to the icon, and should return a String
+* `fileName` (String) File name of the iconset. If not specified it will be the same as `iconsetName`.
