@@ -54,7 +54,7 @@ function polymerIconset(options) {
 
     // default filename if is not set
     if (!options.fileName) {
-      options.fileName = options.iconsetName + '.html';
+        options.fileName = options.iconsetName + '.html';
     }
 
     // start an empty icons string
