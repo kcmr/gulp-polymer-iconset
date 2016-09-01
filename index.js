@@ -49,7 +49,7 @@ function polymerIconset(options) {
     throw new gulpUtil.PluginError(
       'gulp-polymer-iconset',
       'iconsetName option is required'
-      );
+    );
   }
 
   // default filename if is not set
@@ -61,7 +61,6 @@ function polymerIconset(options) {
   var iconsSvgString = '';
 
   function bufferContents(file, encoding, cb) {
-
     // evaluate options according to file
     var iconId = (typeof options.iconId === 'function') ?
     options.iconId(file) : options.iconId;
@@ -89,7 +88,7 @@ function polymerIconset(options) {
           // the icon is ready to be added to the iconset file
 
           // give id to the iconNode
-          $(svgNodeContents[0]).attr('id', iconId);
+          // $(svgNodeContents[0]).attr('id', iconId);
 
           iconsSvgString += $.xml(svgNodeContents[0]);
         } else {
