@@ -94,7 +94,7 @@ function polymerIconset(options) {
           // the icon is ready to be added to the iconset file
 
           // give id to the iconNode
-          // $(svgNodeContents[0]).attr('id', iconId);
+          $(svgNodeContents[0]).attr('id', iconId);
 
           iconsSvgString += $.xml(svgNodeContents[0]);
         } else {
