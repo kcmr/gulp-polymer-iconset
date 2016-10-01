@@ -84,6 +84,12 @@ function polymerIconset(options) {
       // check if the icon is made of multiple nodes
       var svgNodeContents = svgNode.children();
 
+      // remove all IDs in paths and g elements
+      $('path, g').each(function() {
+        var elem = $(this);
+        elem.removeAttr('id');
+      });
+
       if (svgNodeContents.length === 1 && $(svgNodeContents[0]).is('g')) {
           // the icon is ready to be added to the iconset file
 
