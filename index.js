@@ -88,6 +88,7 @@ function polymerIconset(options) {
       $('path, g').each(function() {
         var elem = $(this);
         elem.removeAttr('id');
+        elem.removeAttr('fill');
       });
 
       if (svgNodeContents.length === 1 && $(svgNodeContents[0]).is('g')) {
