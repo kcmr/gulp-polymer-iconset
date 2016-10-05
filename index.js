@@ -84,11 +84,12 @@ function polymerIconset(options) {
       // check if the icon is made of multiple nodes
       var svgNodeContents = svgNode.children();
 
-      // remove all IDs in paths and g elements
-      $('path, g').each(function() {
+      // remove problematic attributes
+      $('path, g, use, [id]').each(function() {
         var elem = $(this);
         elem.removeAttr('id');
         elem.removeAttr('fill');
+        elem.removeAttr('viewBox');
       });
 
       if (svgNodeContents.length === 1 && $(svgNodeContents[0]).is('g')) {
