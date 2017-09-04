@@ -90,6 +90,7 @@ function polymerIconset(options) {
         elem.removeAttr('id');
         elem.removeAttr('fill');
         elem.removeAttr('viewBox');
+        elem.removeAttr('style');
       });
 
       if (svgNodeContents.length === 1 && $(svgNodeContents[0]).is('g')) {
@@ -97,6 +98,7 @@ function polymerIconset(options) {
 
           // give id to the iconNode
           $(svgNodeContents[0]).attr('id', iconId);
+          $(svgNodeContents[0]).attr('fill-rule', 'evenodd');
 
           iconsSvgString += $.xml(svgNodeContents[0]);
         } else {
