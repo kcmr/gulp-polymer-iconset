@@ -35,7 +35,13 @@ var DEFAULT_OPTIONS = {
    * Iconset file name
    * @type {String}
    */
-  fileName: null
+  fileName: null,
+
+  /**
+   * Name for Composer flags
+   * @type {String}
+   */
+  composerName: null
 };
 
 function polymerIconset(options) {
@@ -62,10 +68,8 @@ function polymerIconset(options) {
 
   function bufferContents(file, encoding, cb) {
     // evaluate options according to file
-    var iconId = (typeof options.iconId === 'function') ?
-    options.iconId(file) : options.iconId;
-    var iconSelector = (typeof options.iconSelector === 'function') ?
-    options.iconSelector(file) : options.iconSelector;
+    var iconId = (typeof options.iconId === 'function') ? options.iconId(file) : options.iconId;
+    var iconSelector = (typeof options.iconSelector === 'function') ? options.iconSelector(file) : options.iconSelector;
 
     if (file.isNull()) {
       // return empty file
@@ -85,12 +89,15 @@ function polymerIconset(options) {
       var svgNodeContents = svgNode.children();
 
       // remove problematic attributes
-      $('path, g, use, [id]').each(function() {
+      $('path, g, use, [id], style').each(function() {
         var elem = $(this);
         elem.removeAttr('id');
         elem.removeAttr('fill');
         elem.removeAttr('viewBox');
         elem.removeAttr('style');
+        if (elem.is('style')) {
+          elem.remove();
+        }
       });
 
       if (svgNodeContents.length === 1 && $(svgNodeContents[0]).is('g')) {
@@ -106,8 +113,10 @@ function polymerIconset(options) {
           // we must wrap it with an 'g' (group) tag
           // before adding
 
-          iconsSvgString += '<g id="' + iconId + '">\n' + $.xml(svgNodeContents) + '\n</g>';
+          iconsSvgString += '\n<g id="' + iconId + '" fill-rule="evenodd">\n' + $.xml(svgNodeContents) + '\n</g>';
         }
+
+        iconsSvgString = iconsSvgString.replace(/<defs\/>/, '');
       }
 
       if (file.isStream()) {
